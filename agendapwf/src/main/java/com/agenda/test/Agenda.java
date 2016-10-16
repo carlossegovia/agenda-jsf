@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Agenda {
 	
+	private int id;
 	private String nombre;
 	private String apellido;
 	private String alias;
@@ -14,10 +15,11 @@ public class Agenda {
 	private Date fechacreacion;
 	private Date fechamodificacion;
 	
-	public Agenda(String nombre, String apellido, String alias,
+	public Agenda(int id, String nombre, String apellido, String alias,
 			String telefono, String email, String direccion,
 			Date fechacreacion, Date fechamodificacion) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.alias = alias;
@@ -27,7 +29,7 @@ public class Agenda {
 		this.fechacreacion = fechacreacion;
 		this.fechamodificacion = fechamodificacion;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -91,5 +93,23 @@ public class Agenda {
 	public void setFechamodificacion(Date fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Agenda [id=" + id + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", alias=" + alias + ", telefono=" + telefono
+				+ ", email=" + email + ", direccion=" + direccion
+				+ ", fechacreacion=" + fechacreacion + ", fechamodificacion="
+				+ fechamodificacion + "]";
+	}
+	
 	
 }
