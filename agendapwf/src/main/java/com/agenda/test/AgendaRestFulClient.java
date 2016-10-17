@@ -20,7 +20,7 @@ import com.google.gson.stream.JsonReader;
 
 @ManagedBean(name = "service", eager = true)
 public class AgendaRestFulClient {
-	public void getRequest() {
+	public List<Agenda> getRequest() {
 		System.out.println("probando");
 		try {
 			URL url = new URL(
@@ -50,12 +50,13 @@ public class AgendaRestFulClient {
 			}
 			
 			conn.disconnect();
+			return ag;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 	public String getMessage() {
 	      return "Click aqui";
