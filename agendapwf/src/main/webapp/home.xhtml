@@ -13,7 +13,9 @@
 
 <h:body>
 	 #{helloWorld.message}
-	<h:outputText value="Hello ad!" />
-	<p:commandButton value="Botón"/>
+	<h:outputText value="#{helloWorld.message}!" />
+	<p:commandButton value="#{service.message}"
+		onclick="#{service.getRequest()}"
+		immediate="true"/>
 </h:body>
 </html>

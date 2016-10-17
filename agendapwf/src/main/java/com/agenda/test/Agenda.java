@@ -1,7 +1,5 @@
 package com.agenda.test;
 
-import java.util.Date;
-
 
 public class Agenda {
 	
@@ -12,22 +10,13 @@ public class Agenda {
 	private String telefono;
 	private String email;
 	private String direccion;
-	private Date fechacreacion;
-	private Date fechamodificacion;
+	private String fechacreacion;
+	private String fechamodificacion;
 	
-	public Agenda(int id, String nombre, String apellido, String alias,
-			String telefono, String email, String direccion,
-			Date fechacreacion, Date fechamodificacion) {
+	
+
+	public Agenda() {
 		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.alias = alias;
-		this.telefono = telefono;
-		this.email = email;
-		this.direccion = direccion;
-		this.fechacreacion = fechacreacion;
-		this.fechamodificacion = fechamodificacion;
 	}
 
 	public String getNombre() {
@@ -78,19 +67,19 @@ public class Agenda {
 		this.direccion = direccion;
 	}
 	
-	public Date getFechacreacion() {
+	public String getFechacreacion() {
 		return fechacreacion;
 	}
 	
-	public void setFechacreacion(Date fechacreacion) {
+	public void setFechacreacion(String fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
 	
-	public Date getFechamodificacion() {
+	public String getFechamodificacion() {
 		return fechamodificacion;
 	}
 	
-	public void setFechamodificacion(Date fechamodificacion) {
+	public void setFechamodificacion(String fechamodificacion) {
 		this.fechamodificacion = fechamodificacion;
 	}
 
@@ -109,7 +98,5 @@ public class Agenda {
 				+ ", email=" + email + ", direccion=" + direccion
 				+ ", fechacreacion=" + fechacreacion + ", fechamodificacion="
 				+ fechamodificacion + "]";
-	}
-	
-	
+	}	
 }
