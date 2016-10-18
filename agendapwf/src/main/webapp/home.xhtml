@@ -58,10 +58,12 @@
 			<p:commandButton id="buttonView" icon="ui-icon-zoomin" />
 			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver"
 				position="top" />
-			<p:commandButton id="buttonEdit" icon="ui-icon-pencil" />
+			<p:commandButton id="buttonEdit" icon="ui-icon-pencil" action="formulario"
+			actionListener="#{service.editar(contacto.id)}"/>
 			<p:tooltip id="toolTipFade2" for="buttonEdit" value="Editar"
 				position="top" />
-			<p:commandButton id="buttonDelete" icon="ui-icon-trash" />
+			<p:commandButton id="buttonDelete" icon="ui-icon-trash" action="home"
+			actionListener="#{service.deleteContacto(contacto.id)}"/>
 			<p:tooltip id="toolTipFade3" for="buttonDelete" value="Eliminar"
 				position="top" />
 		</p:column>
@@ -69,7 +71,7 @@
 
 	<h:form>
 		<h:commandButton action="formulario"
-			actionListener="#{service.inicializate()}" value="Nuevo Contacto" />
+			actionListener="#{service.agregar()}" value="Nuevo Contacto" />
 	</h:form>
 
 </h:body>

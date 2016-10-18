@@ -14,6 +14,14 @@ public class Contacto {
 
 	public Contacto() {
 		super();
+		this.nombre="";
+		this.apellido="";
+		this.alias="";
+		this.telefono="";
+		this.email="";
+		this.direccion="";
+		this.fechacreacion="";
+		this.fechamodificacion=null;
 	}
 
 	public String getNombre() {

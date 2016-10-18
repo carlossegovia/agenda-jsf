@@ -1,19 +1,67 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	
+
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"  
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui" >
-
+	xmlns:p="http://primefaces.org/ui">
+<h:outputText value="#{service.mostrar()}"></h:outputText>
 <h:head>
-	<title>PWF1</title>
+	<title>PWF</title>
 </h:head>
 
 <h:body>
-	 #{helloWorld.message}
-	<h:outputText value="Hello ad!" />
-	<p:commandButton value="Botón"/>
+
+	<p:dataTable id="tablaContactos" var="contacto" value="#{service.getListaContactos()}"
+	 	paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20"
+	 	paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		
+		<p:column headerText="Id">
+			<h:outputText value="#{contacto.id}" />
+		</p:column>
+
+		<p:column headerText="Nombre">
+			<h:outputText value="#{contacto.nombre}" />
+		</p:column>
+
+		<p:column headerText="Apellido">
+			<h:outputText value="#{contacto.apellido}" />
+		</p:column>
+
+		<p:column headerText="Alias">
+			<h:outputText value="#{contacto.alias}" />
+		</p:column>
+		
+		<p:column headerText="Teléfono">
+			<h:outputText value="#{contacto.telefono}" />
+		</p:column>
+		
+		<p:column headerText="Email">
+			<h:outputText value="#{contacto.email}" />
+		</p:column>
+		
+		<p:column headerText="Dirección">
+			<h:outputText value="#{contacto.direccion}" />
+		</p:column>
+		
+		<p:column headerText="Fecha de Creación">
+			<h:outputText value="#{contacto.fechacreacion}" />
+		</p:column>
+		
+		<p:column headerText="Fecha de Modificación">
+			<h:outputText value="#{contacto.fechamodificacion}" />
+		</p:column>
+		
+		<p:column headerText="Acción">
+			<p:commandButton id="buttonView" icon="ui-icon-zoomin"/>
+			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver" position="top"/>
+			<p:commandButton id="buttonEdit" icon="ui-icon-pencil"/>
+			<p:tooltip id="toolTipFade2" for="buttonEdit" value="Editar" position="top"/>
+			<p:commandButton id="buttonDelete" icon="ui-icon-trash"/>
+			<p:tooltip id="toolTipFade3" for="buttonDelete" value="Eliminar" position="top"/>
+		</p:column>
+	</p:dataTable>
+		
 </h:body>
 </html>
