@@ -13,12 +13,6 @@
 
 <h:body>
 
-	<h:outputStylesheet library="css" name="style.css">
-		#tablaContactos {
-   			width: 50%;
-		}	
-	</h:outputStylesheet>
-
 	<p:dataTable id="tablaContactos" var="contacto" value="#{service.getListaContactos()}">
 		<p:column headerText="Id">
 			<h:outputText value="#{contacto.id}" />
@@ -57,11 +51,14 @@
 		</p:column>
 		
 		<p:column headerText="Acción">
-			<p:commandButton icon="ui-icon-eye"/>
-			<p:commandButton icon="ui-icon-edit"/>
-			<p:commandButton  icon="ui-icon-trash"/>
+			<p:commandButton id="buttonView" icon="ui-icon-zoomin"/>
+			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver" position="top"/>
+			<p:commandButton id="buttonEdit" icon="ui-icon-pencil"/>
+			<p:tooltip id="toolTipFade2" for="buttonEdit" value="Editar" position="top"/>
+			<p:commandButton id="buttonDelete" icon="ui-icon-trash"/>
+			<p:tooltip id="toolTipFade3" for="buttonDelete" value="Eliminar" position="top"/>
 		</p:column>
 	</p:dataTable>
-
+		
 </h:body>
 </html>

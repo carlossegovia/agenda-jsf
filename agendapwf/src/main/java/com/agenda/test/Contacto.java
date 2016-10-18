@@ -98,5 +98,11 @@ public class Contacto {
 				+ ", email=" + email + ", direccion=" + direccion
 				+ ", fechacreacion=" + fechacreacion + ", fechamodificacion="
 				+ fechamodificacion + "]";
-	}	
+	}
+	
+	public String toPost() {
+		return "{\"nombre\":\""+nombre+"\",\"apellido\":\""+apellido+"\",\"alias\":\""+
+				alias+"\",\"telefono\":\""+telefono+"\",\"email\":\""+email+"\",\"direccion\":\""+
+				direccion+"\"}";
+	}
 }
