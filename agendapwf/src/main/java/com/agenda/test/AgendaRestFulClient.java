@@ -11,17 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 @ManagedBean(name = "service", eager = true)
+@SessionScoped
 public class AgendaRestFulClient {
 
 	private static final String targetURL = "https://desa03.konecta.com.py/pwf/rest/agenda";
-	
-	public Contacto contacto;	
+
+	public Contacto contacto;
 
 	public Contacto getContacto() {
 		return contacto;
@@ -30,9 +32,15 @@ public class AgendaRestFulClient {
 	public void setContacto(Contacto contacto) {
 		this.contacto = contacto;
 	}
-	
+
 	public String getFormulario() {
 		return "formulario";
+	}
+
+	public void inicializate() {
+		contacto = new Contacto();
+		contacto.setFechacreacion("");
+		contacto.setFechamodificacion("");
 	}
 
 	public List<Contacto> getListaContactos() {
@@ -73,7 +81,7 @@ public class AgendaRestFulClient {
 		return ag;
 	}
 
-	public void postContacto(Contacto item) {
+	public void postContacto() {
 		try {
 			URL url = new URL(targetURL);
 
@@ -84,8 +92,7 @@ public class AgendaRestFulClient {
 			httpConnection.setRequestProperty("Content-Type",
 					"application/json");
 
-			String input = item.toPost();
-			
+			String input = this.contacto.toPost();
 
 			OutputStream outputStream = httpConnection.getOutputStream();
 			outputStream.write(input.getBytes());
@@ -106,6 +113,7 @@ public class AgendaRestFulClient {
 			}
 
 			httpConnection.disconnect();
+			this.contacto = null;
 
 		} catch (MalformedURLException e) {
 
@@ -114,7 +122,6 @@ public class AgendaRestFulClient {
 		} catch (IOException e) {
 
 			e.printStackTrace();
-
 		}
 	}
 

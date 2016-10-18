@@ -13,20 +13,28 @@
 
 <h:body>
 
+	<h:form>
 		<h:outputText value="Nombre" />
-		<p:inputText value="#{servicio.contacto.nombre}" />
+		<p:inputText value="#{service.contacto.nombre}" />
 
 		<h:outputText value="Apellido" />
-		<p:inputText value="#{servicio.contacto.apellido}" />
-		
+		<p:inputText value="#{service.contacto.apellido}" />
+
 		<h:outputText value="Alias" />
-		<p:inputText value="#{servicio.contacto.alias}" />
-		
+		<p:inputText value="#{service.contacto.alias}" />
+
 		<h:outputText value="Telefono" />
-		<p:inputText value="#{servicio.contacto.telefono}" />
+		<p:inputText value="#{service.contacto.telefono}" />
 		
+		<h:outputText value="Email" />
+		<p:inputText value="#{service.contacto.email}" />
+
 		<h:outputText value="Dirección" />
-		<p:inputText value="#{servicio.contacto.direccion}" />
+		<p:inputText value="#{service.contacto.direccion}" />
+
+		<h:commandButton action="home" value="Guardar"
+			actionListener="#{service.postContacto()}" />
+	</h:form>
 
 </h:body>
 </html>
