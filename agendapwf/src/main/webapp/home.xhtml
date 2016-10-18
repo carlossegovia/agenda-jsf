@@ -13,7 +13,10 @@
 
 <h:body>
 
-	<p:dataTable id="tablaContactos" var="contacto" value="#{service.getListaContactos()}">
+	<p:dataTable id="tablaContactos" var="contacto" value="#{service.getListaContactos()}"
+	 	paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20"
+	 	paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+		
 		<p:column headerText="Id">
 			<h:outputText value="#{contacto.id}" />
 		</p:column>
