@@ -1,7 +1,7 @@
 package com.agenda.test;
 
 
-public class Agenda {
+public class Contacto {
 	
 	private int id;
 	private String nombre;
@@ -15,7 +15,7 @@ public class Agenda {
 	
 	
 
-	public Agenda() {
+	public Contacto() {
 		super();
 	}
 

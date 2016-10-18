@@ -16,14 +16,10 @@
 	<h:outputStylesheet library="css" name="style.css">
 		#tablaContactos {
    			width: 50%;
-		}
-		
+		}	
 	</h:outputStylesheet>
-	
-	 #{helloWorld.message}
-	<h:outputText value="#{helloWorld.message}!" />
 
-	<p:dataTable id="tablaContactos" var="contacto" value="#{service.getRequest()}">
+	<p:dataTable id="tablaContactos" var="contacto" value="#{service.getListaContactos()}">
 		<p:column headerText="Id">
 			<h:outputText value="#{contacto.id}" />
 		</p:column>
