@@ -17,6 +17,7 @@ import java.util.TimeZone;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ComponentSystemEvent;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +30,8 @@ public class AgendaRestFulClient {
 	private static final String targetURL = "https://desa03.konecta.com.py/pwf/rest/agenda";
 
 	public Contacto contacto;
-	public boolean	editar;
+	public boolean	editar = false;
+	public List<Contacto> listaContactos;
 	
 	public Contacto getContacto() {
 		return contacto;
@@ -38,9 +40,18 @@ public class AgendaRestFulClient {
 	public void setContacto(Contacto contacto) {
 		this.contacto = contacto;
 	}
+	
+	public void setListaContactos(List<Contacto> listaContactos) {
+		this.listaContactos = listaContactos;
+	}
 
-	public String getFormulario() {
-		return "formulario";
+	public List<Contacto> getListaContactos() {
+		return listaContactos;
+	}
+	
+	public void inicializar(ComponentSystemEvent event){
+		this.listaContactos = new ArrayList<Contacto>();
+		setListaContactos(getListaContactosFromServer());
 	}
 	
 	public void guardar(){
@@ -50,15 +61,18 @@ public class AgendaRestFulClient {
 		}else{
 			this.postContacto();
 		}
-	}
-	public void agregar() {
-		this.editar=false;
-		this.contacto=new Contacto();
+		editar = false;
 	}
 	
-	public void editar(int id){
+	public void inicializateFormulario(){
+		if (!editar){
+			this.contacto=new Contacto();
+		}
+	}
+	
+	public void goEditar(int id){
 		this.editar=true;
-		this.contacto= this.getContactoID(id);
+		setContacto(getContactoID(id));
 	}
 	
 	public Contacto getContactoID(int id){
@@ -96,8 +110,7 @@ public class AgendaRestFulClient {
 		return contacto;
 	}
 	
-	public List<Contacto> getListaContactos() {
-
+	public List<Contacto> getListaContactosFromServer() {
 		List<Contacto> ag = new ArrayList<Contacto>();
 		try {
 			URL url = new URL(targetURL);

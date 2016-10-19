@@ -12,6 +12,7 @@
 </h:head>
 
 <h:body>
+	<f:event listener="#{service.inicializar}" type="preRenderView" />
 
 	<p:dataTable id="tablaContactos" var="contacto"
 		value="#{service.getListaContactos()}" paginator="true" rows="10"
@@ -58,20 +59,22 @@
 			<p:commandButton id="buttonView" icon="ui-icon-zoomin" />
 			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver"
 				position="top" />
-			<p:commandButton id="buttonEdit" icon="ui-icon-pencil" action="formulario"
-			actionListener="#{service.editar(contacto.id)}"/>
+			<p:commandButton id="buttonEdit" icon="ui-icon-pencil"
+				action="#{navigation.getFormulario()}"
+				actionListener="#{service.goEditar(contacto.id)}" />
 			<p:tooltip id="toolTipFade2" for="buttonEdit" value="Editar"
 				position="top" />
-			<p:commandButton id="buttonDelete" icon="ui-icon-trash" action="home"
-			actionListener="#{service.deleteContacto(contacto.id)}"/>
+			<p:commandButton id="buttonDelete" icon="ui-icon-trash"
+				actionListener="#{service.deleteContacto(contacto.id)}"
+				process="@this" update="tablaContactos" />
 			<p:tooltip id="toolTipFade3" for="buttonDelete" value="Eliminar"
 				position="top" />
 		</p:column>
 	</p:dataTable>
 
 	<h:form>
-		<h:commandButton action="formulario"
-			actionListener="#{service.agregar()}" value="Nuevo Contacto" />
+		<h:commandButton action="#{navigation.getFormulario()}"
+			actionListener="#{service.inicializateFormulario()}" value="Nuevo Contacto" />
 	</h:form>
 
 </h:body>
