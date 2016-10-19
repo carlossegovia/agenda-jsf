@@ -13,12 +13,18 @@
 
 <h:body>
 	<f:event listener="#{service.inicializar}" type="preRenderView" />
-
+	<h:form>
+		<h:outputLabel for="filtro" value="Ingrese texto a buscar:" style="font-weight:bold"/>
+		<p:inputText id="filtro" value="#{service.filtro}" label="Filtro" />
+		<p:commandButton 
+			actionListener="#{service.filtrar()}" value="Buscar" process="@this" update="tablaContactos"/>
+		
+	</h:form>
 	<p:dataTable id="tablaContactos" var="contacto" 
 		value="#{service.getListaContactos()}" paginator="true" rows="10"
 		rowsPerPageTemplate="5,10,15,20"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-
+		
 		<p:column headerText="Id">
 			<h:outputText value="#{contacto.id}" />
 		</p:column>
@@ -56,7 +62,7 @@
 		</p:column>
 
 		<p:column headerText="Acción">
-			<p:commandButton id="buttonView" icon="ui-icon-zoomin" type="button" update=":formdialog:dialogo" oncomplete="PF('dlg2').show()">
+			<p:commandButton id="buttonView" icon="ui-icon-zoomin" type="button" update=":formdialog:dialogoDetalle" oncomplete="PF('dlg2').show()">
 				<f:setPropertyActionListener value="#{contacto}" target="#{service.seleccionado}" />
 			</p:commandButton>
 			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver"
@@ -79,8 +85,8 @@
 			actionListener="#{service.inicializateFormulario()}" value="Nuevo Contacto" />
 	</h:form>
 	<h:form id="formdialog">
-		<p:dialog id="dialogo" header="Ver Contacto" width="400" widgetVar="dlg2" modal="true" height="100" showEffect="explode" hideEffect="bounce" layout="grid">
-		    <p:outputPanel id="carDetail" style="text-align:center;">
+		<p:dialog header="Ver Contacto" width="400" widgetVar="dlg2" modal="true" height="100" showEffect="explode" hideEffect="bounce" layout="grid">
+		    <p:outputPanel id="dialogoDetalle" style="text-align:center;">
 		           <p:panelGrid  columns="2" rendered="#{not empty service.seleccionado}" columnClasses="label,value">
 		               
 		

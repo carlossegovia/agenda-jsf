@@ -33,6 +33,8 @@ public class AgendaRestFulClient {
 	public boolean	editar = false;
 	public List<Contacto> listaContactos;
 	public Contacto seleccionado;
+	public String filtro;
+	
 	
 	public class JsonRecibido{
 		public int total;
@@ -43,6 +45,15 @@ public class AgendaRestFulClient {
 			this.lista= new ArrayList<Contacto>();
 		}
 	}
+	
+	public String getFiltro() {
+		return this.filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
+	}
+	
 	
 	public Contacto getContacto() {
 		return contacto;
@@ -74,6 +85,7 @@ public class AgendaRestFulClient {
 	
 	public void inicializar(ComponentSystemEvent event){
 		this.listaContactos = new ArrayList<Contacto>();
+		this.filtro = "";
 		setListaContactos(getListaContactosFromServer());
 	}
 	
@@ -91,6 +103,11 @@ public class AgendaRestFulClient {
 		if (!editar){
 			this.contacto=new Contacto();
 		}
+	}
+	
+	public void filtrar(){
+		System.out.println("El filtro es: "+this.filtro);
+		this.getListaContactosFromServer();
 	}
 	
 	public void goEditar(int id){
@@ -136,7 +153,8 @@ public class AgendaRestFulClient {
 	public List<Contacto> getListaContactosFromServer() {
 		JsonRecibido ag = new JsonRecibido();
 		try {
-			URL url = new URL(targetURL);
+			System.out.println(this.filtro);
+			URL url = new URL(targetURL+"?filtro="+this.filtro);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
