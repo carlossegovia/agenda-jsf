@@ -33,6 +33,16 @@ public class AgendaRestFulClient {
 	public boolean	editar = false;
 	public List<Contacto> listaContactos;
 	
+	public class JsonRecibido{
+		public int total;
+		public List<Contacto> lista;
+		
+		public JsonRecibido(){
+			this.total=0;
+			this.lista= new ArrayList<Contacto>();
+		}
+	}
+	
 	public Contacto getContacto() {
 		return contacto;
 	}
@@ -111,7 +121,7 @@ public class AgendaRestFulClient {
 	}
 	
 	public List<Contacto> getListaContactosFromServer() {
-		List<Contacto> ag = new ArrayList<Contacto>();
+		JsonRecibido ag = new JsonRecibido();
 		try {
 			URL url = new URL(targetURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -131,20 +141,18 @@ public class AgendaRestFulClient {
 
 			while ((output = br.readLine()) != null) {
 				System.out.println(output);
-				String output1 = output.substring(22, output.length() - 1);
-				System.out.println(output1);
 				Gson gson = new GsonBuilder().create();
-				ag = gson.fromJson(output1, new TypeToken<List<Contacto>>() {
+				ag = gson.fromJson(output, new TypeToken<JsonRecibido>() {
 				}.getType());
 			}
-
+			
 			conn.disconnect();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return ag;
+		return ag.lista;
 	}
 
 	public void postContacto() {
@@ -264,14 +272,15 @@ public class AgendaRestFulClient {
 	}
 	
 	public String formatDate(String date) throws ParseException
-	{
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.'Z'");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-		Date temp= sdf.parse(date);
-		sdf=new SimpleDateFormat("dd-MM-YYYY hh:mm");
-		String dateString=sdf.format(temp);
-		return dateString ;
-
+	{	if (date!=""){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+			Date temp= sdf.parse(date);
+			sdf=new SimpleDateFormat("dd-MM-YYYY hh:mm");
+			String dateString=sdf.format(temp);
+			return dateString ;
+		}
+		else return date;
 	}
 
 

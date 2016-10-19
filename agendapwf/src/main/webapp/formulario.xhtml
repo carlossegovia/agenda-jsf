@@ -16,26 +16,36 @@
 	<f:event listener="#{service.inicializateFormulario()}" type="preRenderView" />
 	
 	<h:form>
-		<h:outputText value="Nombre" />
-		<p:inputText value="#{service.contacto.nombre}" />
-
-		<h:outputText value="Apellido" />
-		<p:inputText value="#{service.contacto.apellido}" />
-
-		<h:outputText value="Alias" />
-		<p:inputText value="#{service.contacto.alias}" />
-
-		<h:outputText value="Telefono" />
-		<p:inputText value="#{service.contacto.telefono}" />
+		<p:panel id="panel" header="Form" style="margin-bottom:10px;">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputText value="Nombre" />
+				<p:inputText value="#{service.contacto.nombre}" required="true"/>
 		
-		<h:outputText value="Email" />
-		<p:inputText value="#{service.contacto.email}" />
-
-		<h:outputText value="Dirección" />
-		<p:inputText value="#{service.contacto.direccion}" />
-
-		<h:commandButton action="#{navigation.getHome()}" value="Guardar"
-			actionListener="#{service.guardar()}" />
+				<h:outputText value="Apellido" />
+				<p:inputText value="#{service.contacto.apellido}" required="true"/>
+		
+				<h:outputText value="Alias" />
+				<p:inputText value="#{service.contacto.alias}" />
+		
+				<h:outputText value="Telefono" />
+				<p:inputText value="#{service.contacto.telefono}" required="true"/>
+				
+				<h:outputText value="Email" />
+				<p:inputText value="#{service.contacto.email}" required="true"/>
+		
+				<h:outputText value="Dirección" />
+				<p:inputText value="#{service.contacto.direccion}" />
+			</h:panelGrid>
+		</p:panel>
+		<p:commandButton action="#{navigation.getHome()}" value="Guardar"
+			actionListener="#{service.guardar()}" update="panel">
+			<p:confirm header="Confirmacion" message="Estás seguro?" icon="ui-icon-alert" />
+		</p:commandButton>
+			
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    </p:confirmDialog>
 	</h:form>
 
 </h:body>

@@ -48,11 +48,11 @@
 		</p:column>
 
 		<p:column headerText="Fecha de Creación">
-			<h:outputText value="#{contacto.fechacreacion}" />
+			<h:outputText value="#{service.formatDate(contacto.fechacreacion)}" />
 		</p:column>
 
 		<p:column headerText="Fecha de Modificación">
-			<h:outputText value="#{contacto.fechamodificacion}" />
+			<h:outputText value="#{service.formatDate(contacto.fechamodificacion)}" />
 		</p:column>
 
 		<p:column headerText="Acción">
