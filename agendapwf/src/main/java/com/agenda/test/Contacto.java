@@ -6,7 +6,7 @@ public class Contacto {
 	private String nombre;
 	private String apellido;
 	private String alias;
-	private String telefono;
+	private Integer telefono;
 	private String email;
 	private String direccion;
 	private String fechacreacion;
@@ -17,7 +17,6 @@ public class Contacto {
 		this.nombre="";
 		this.apellido="";
 		this.alias="";
-		this.telefono="";
 		this.email="";
 		this.direccion="";
 		this.fechacreacion="";
@@ -48,11 +47,11 @@ public class Contacto {
 		this.alias = alias;
 	}
 
-	public String getTelefono() {
+	public Integer getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(String telefono) {
+	public void setTelefono(Integer telefono) {
 		this.telefono = telefono;
 	}
 

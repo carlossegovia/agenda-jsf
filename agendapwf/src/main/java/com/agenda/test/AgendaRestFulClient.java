@@ -32,6 +32,7 @@ public class AgendaRestFulClient {
 	public Contacto contacto;
 	public boolean	editar = false;
 	public List<Contacto> listaContactos;
+	public Contacto seleccionado;
 	
 	public class JsonRecibido{
 		public int total;
@@ -49,6 +50,18 @@ public class AgendaRestFulClient {
 
 	public void setContacto(Contacto contacto) {
 		this.contacto = contacto;
+	}
+	
+	public Contacto getSeleccionado() {
+		return seleccionado;
+	}
+
+	public void setSeleccionado(Contacto contacto) {
+		this.seleccionado = contacto;
+	}
+	
+	public void seleccionar(int id){
+		this.seleccionado = this.getContactoID(id);
 	}
 	
 	public void setListaContactos(List<Contacto> listaContactos) {

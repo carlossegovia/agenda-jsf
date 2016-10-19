@@ -14,7 +14,7 @@
 <h:body>
 	<f:event listener="#{service.inicializar}" type="preRenderView" />
 
-	<p:dataTable id="tablaContactos" var="contacto"
+	<p:dataTable id="tablaContactos" var="contacto" 
 		value="#{service.getListaContactos()}" paginator="true" rows="10"
 		rowsPerPageTemplate="5,10,15,20"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
@@ -56,7 +56,9 @@
 		</p:column>
 
 		<p:column headerText="Acción">
-			<p:commandButton id="buttonView" icon="ui-icon-zoomin" />
+			<p:commandButton id="buttonView" icon="ui-icon-zoomin" type="button" update=":formdialog:dialogo" oncomplete="PF('dlg2').show()">
+				<f:setPropertyActionListener value="#{contacto}" target="#{service.seleccionado}" />
+			</p:commandButton>
 			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver"
 				position="top" />
 			<p:commandButton id="buttonEdit" icon="ui-icon-pencil"
@@ -71,11 +73,31 @@
 				position="top" />
 		</p:column>
 	</p:dataTable>
-
+		
 	<h:form>
-		<h:commandButton action="#{navigation.getFormulario()}"
+		<p:commandButton action="#{navigation.getFormulario()}"
 			actionListener="#{service.inicializateFormulario()}" value="Nuevo Contacto" />
 	</h:form>
-
+	<h:form id="formdialog">
+		<p:dialog id="dialogo" header="Ver Contacto" width="400" widgetVar="dlg2" modal="true" height="100" showEffect="explode" hideEffect="bounce" layout="grid">
+		    <p:outputPanel id="carDetail" style="text-align:center;">
+		           <p:panelGrid  columns="2" rendered="#{not empty service.seleccionado}" columnClasses="label,value">
+		               
+		
+		               <h:outputText value="Id:" />
+		               <h:outputText value="#{service.seleccionado.id}" />
+		
+		               <h:outputText value="Apellido" />
+		               <h:outputText value="#{service.seleccionado.apellido}" />
+		
+		               <h:outputText value="Alias:" />
+		               <h:outputText value="#{service.seleccionado.alias}" />
+		
+		               <h:outputText value="Email:" />
+		               <h:outputText value="#{service.seleccionado.email}" />
+		           </p:panelGrid>
+		       </p:outputPanel>
+		</p:dialog>  
+	</h:form>	
 </h:body>
 </html>
