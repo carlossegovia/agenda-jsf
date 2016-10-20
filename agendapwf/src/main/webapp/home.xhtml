@@ -20,6 +20,9 @@
 			actionListener="#{service.filtrar()}" value="Buscar" process="@this" update="tablaContactos"/>
 		
 	</h:form>
+	
+	<p:separator  style=" background-color:white;border-color:white;height:25px" />
+	
 	<p:dataTable id="tablaContactos" var="contacto" 
 		value="#{service.getListaContactos()}" paginator="true" rows="10"
 		rowsPerPageTemplate="5,10,15,20"
@@ -79,7 +82,9 @@
 				position="top" />
 		</p:column>
 	</p:dataTable>
-		
+	
+	<p:separator  style="background-color:white;border-color:white;height:15px" />
+	
 	<h:form>
 		<p:commandButton action="#{navigation.getFormulario()}"
 			actionListener="#{service.inicializateFormulario()}" value="Nuevo Contacto" />
