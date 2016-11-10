@@ -13,21 +13,58 @@
 
 <h:body>
 	<f:event listener="#{service.inicializar}" type="preRenderView" />
+	<h:outputStylesheet>
+	
+	.botonLindo{
+		color: red;
+	}
+	
+	.btn {
+	  background: #3498db;
+	  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+	  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+	  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+	  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+	  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+	  -webkit-border-radius: 28;
+	  -moz-border-radius: 28;
+	  border-radius: 28px;
+	  font-family: Arial;
+	  color: #ffffff;
+	  font-size: 20px;
+	  padding: 10px 20px 10px 20px;
+	  text-decoration: none;
+	}
+	
+	.btn:hover {
+	  background: #3cb0fd;
+	  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+	  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+	  text-decoration: none;
+	}
+	
+	</h:outputStylesheet>
+
 	<h:form>
-		<h:outputLabel for="filtro" value="Ingrese texto a buscar:" style="font-weight:bold"/>
+		<h:outputLabel styleClass="prueba" for="filtro"
+			value="Ingrese texto a buscar:" style="font-weight:bold" />
 		<p:inputText id="filtro" value="#{service.filtro}" label="Filtro" />
-		<p:commandButton 
-			actionListener="#{service.filtrar()}" value="Buscar" process="@this" update="tablaContactos"/>
-		
+		<h:commandButton styleClass="btn" actionListener="#{service.filtrar()}" value="Buscar"
+			process="@this" update="tablaContactos" />
+
 	</h:form>
-	
-	<p:separator  style=" background-color:white;border-color:white;height:25px" />
-	
-	<p:dataTable id="tablaContactos" var="contacto" 
+
+	<p:separator
+		style=" background-color:white;border-color:white;height:25px" />
+
+	<p:dataTable id="tablaContactos" var="contacto"
 		value="#{service.getListaContactos()}" paginator="true" rows="10"
 		rowsPerPageTemplate="5,10,15,20"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-		
+
 		<p:column headerText="Id">
 			<h:outputText value="#{contacto.id}" />
 		</p:column>
@@ -61,12 +98,15 @@
 		</p:column>
 
 		<p:column headerText="Fecha de Modificación">
-			<h:outputText value="#{service.formatDate(contacto.fechamodificacion)}" />
+			<h:outputText
+				value="#{service.formatDate(contacto.fechamodificacion)}" />
 		</p:column>
 
 		<p:column headerText="Acción">
-			<p:commandButton id="buttonView" icon="ui-icon-zoomin" type="button" update=":formdialog:dialogoDetalle" oncomplete="PF('dlg2').show()">
-				<f:setPropertyActionListener value="#{contacto}" target="#{service.seleccionado}" />
+			<p:commandButton id="buttonView" icon="ui-icon-zoomin" type="button"
+				update=":formdialog:dialogoDetalle" oncomplete="PF('dlg2').show()">
+				<f:setPropertyActionListener value="#{contacto}"
+					target="#{service.seleccionado}" />
 			</p:commandButton>
 			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver"
 				position="top" />
@@ -82,33 +122,39 @@
 				position="top" />
 		</p:column>
 	</p:dataTable>
-	
-	<p:separator  style="background-color:white;border-color:white;height:15px" />
-	
+
+	<p:separator
+		style="background-color:white;border-color:white;height:15px" />
+
 	<h:form>
 		<p:commandButton action="#{navigation.getFormulario()}"
-			actionListener="#{service.inicializateFormulario()}" value="Nuevo Contacto" />
+			actionListener="#{service.inicializateFormulario()}"
+			value="Nuevo Contacto" />
 	</h:form>
 	<h:form id="formdialog">
-		<p:dialog header="Ver Contacto" width="400" widgetVar="dlg2" modal="true" height="100" showEffect="explode" hideEffect="bounce" layout="grid">
-		    <p:outputPanel id="dialogoDetalle" style="text-align:center;">
-		           <p:panelGrid  columns="2" rendered="#{not empty service.seleccionado}" columnClasses="label,value">
-		               
-		
-		               <h:outputText value="Id:" />
-		               <h:outputText value="#{service.seleccionado.id}" />
-		
-		               <h:outputText value="Apellido" />
-		               <h:outputText value="#{service.seleccionado.apellido}" />
-		
-		               <h:outputText value="Alias:" />
-		               <h:outputText value="#{service.seleccionado.alias}" />
-		
-		               <h:outputText value="Email:" />
-		               <h:outputText value="#{service.seleccionado.email}" />
-		           </p:panelGrid>
-		       </p:outputPanel>
-		</p:dialog>  
-	</h:form>	
+		<p:dialog header="Ver Contacto" width="400" widgetVar="dlg2"
+			modal="true" height="100" showEffect="explode" hideEffect="bounce"
+			layout="grid">
+			<p:outputPanel id="dialogoDetalle" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty service.seleccionado}"
+					columnClasses="label,value">
+
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{service.seleccionado.id}" />
+
+					<h:outputText value="Apellido" />
+					<h:outputText value="#{service.seleccionado.apellido}" />
+
+					<h:outputText value="Alias:" />
+					<h:outputText value="#{service.seleccionado.alias}" />
+
+					<h:outputText value="Email:" />
+					<h:outputText value="#{service.seleccionado.email}" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+	</h:form>
 </h:body>
 </html>

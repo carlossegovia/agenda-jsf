@@ -85,7 +85,7 @@ public class AgendaRestFulClient {
 	
 	public void inicializar(ComponentSystemEvent event){
 		this.listaContactos = new ArrayList<Contacto>();
-		this.filtro = "";
+		//this.filtro = "";
 		setListaContactos(getListaContactosFromServer());
 	}
 	
@@ -220,6 +220,7 @@ public class AgendaRestFulClient {
 
 			httpConnection.disconnect();
 			this.contacto = null;
+			this.filtro = "";
 
 		} catch (MalformedURLException e) {
 
