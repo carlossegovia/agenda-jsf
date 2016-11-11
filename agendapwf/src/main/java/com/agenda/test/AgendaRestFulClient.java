@@ -105,6 +105,12 @@ public class AgendaRestFulClient {
 		}
 	}
 	
+	public void limpiar(){
+		this.filtro="";
+		System.out.println("El filtro es: "+this.filtro);
+		this.getListaContactosFromServer();
+	}
+	
 	public void filtrar(){
 		System.out.println("El filtro es: "+this.filtro);
 		this.getListaContactosFromServer();

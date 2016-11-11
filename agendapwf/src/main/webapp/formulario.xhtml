@@ -13,10 +13,28 @@
 
 <h:body>
 	
+	<h:outputStylesheet>	
+	.container {
+  		display: flex;
+  		justify-content: center;
+  		margin-top: 20px;
+  		margin-bottom: 20px;
+	}
+
+	.center {
+		width: 15%;
+	}
+	
+	.panelFull {
+		margin/top:100px;
+	}
+		
+	</h:outputStylesheet>
+	
 	<f:event listener="#{service.inicializateFormulario()}" type="preRenderView" />
 	
 	<h:form>
-		<p:panel id="panel" header="Form" style="margin-bottom:10px;">
+		<p:panel styleClass="panelFull" id="panel" header="Complete los campos: " style="width:50%;margin: 0 auto;">
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel for="nombre" value="Nombre:" style="font-weight:bold"/>                    
 	            <p:inputText id="nombre" value="#{service.contacto.nombre}" required="true" label="Nombre"
@@ -53,6 +71,9 @@
 				<p:inputText id="direccion" value="#{service.contacto.direccion}" label="Dirección" />
 			</h:panelGrid>
 		</p:panel>
+		
+		<div class="container">
+		<div class="center">	
 		<p:commandButton action="#{navigation.getHome()}" value="Guardar"
 			actionListener="#{service.guardar()}" update="panel" icon="ui-icon-disk" validateClient="true">
 			<p:confirm header="Confirmacion" message="Estás seguro?" icon="ui-icon-alert" />
@@ -66,6 +87,8 @@
 	        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 	        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 	    </p:confirmDialog>
+	    </div>
+		</div>
 	</h:form>
 
 </h:body>
