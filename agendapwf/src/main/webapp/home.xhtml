@@ -88,7 +88,7 @@
 
 	<p:dataTable id="tablaContactos" var="contacto"
 		value="#{service.getListaContactos()}" paginator="true" rows="10"
-		rowsPerPageTemplate="5,10,15,20"
+		rowsPerPageTemplate="5,10,15,20" currentPageReportTemplate="Total: #{service.cantidadContactos}"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
 		<p:column headerText="Id">
@@ -129,10 +129,8 @@
 		</p:column>
 
 		<p:column headerText="Acción">
-			<p:commandButton id="buttonView" icon="ui-icon-zoomin" type="button"
-				update=":formdialog:dialogoDetalle" oncomplete="PF('dlg2').show()">
-				<f:setPropertyActionListener value="#{contacto}"
-					target="#{service.seleccionado}" />
+			<p:commandButton id="buttonView" icon="ui-icon-zoomin"
+				update=":formdialog:dialogoDetalle" actionListener="#{service.setSelec(contacto)}" onclick="PF('dlg2').show()">
 			</p:commandButton>
 			<p:tooltip id="toolTipFade1" for="buttonView" value="Ver"
 				position="top" />
@@ -143,7 +141,15 @@
 				position="top" />
 			<p:commandButton id="buttonDelete" icon="ui-icon-trash"
 				actionListener="#{service.deleteContacto(contacto.id)}"
-				process="@this" update="tablaContactos" />
+				process="@this" update="tablaContactos" validateClient="true">
+				<p:confirm header="Confirmacion" message="Estás seguro?" icon="ui-icon-alert" />
+			</p:commandButton>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    	</p:confirmDialog>
+	    
 			<p:tooltip id="toolTipFade3" for="buttonDelete" value="Eliminar"
 				position="top" />
 		</p:column>
@@ -157,30 +163,44 @@
 			actionListener="#{service.inicializateFormulario()}"
 			value="Nuevo Contacto" />
 	</h:form>
+	
 	<h:form id="formdialog">
-		<p:dialog header="Ver Contacto" width="400" widgetVar="dlg2"
-			modal="true" height="100" showEffect="explode" hideEffect="bounce"
-			layout="grid">
+		<p:dialog header="Datos del Contacto" width="400" widgetVar="dlg2"
+			modal="true" height="300" resizable="false" layout="grid">
+			
 			<p:outputPanel id="dialogoDetalle" style="text-align:center;">
-				<p:panelGrid columns="2"
-					rendered="#{not empty service.seleccionado}"
+				<p:panelGrid columns="2"					
 					columnClasses="label,value">
-
-
-					<h:outputText value="Id:" />
-					<h:outputText value="#{service.seleccionado.id}" />
-
-					<h:outputText value="Apellido" />
+					<h:outputText value="Id: " style="font-weight:bold" />
+					<h:outputText value="#{service.seleccionado.id}"/>
+					
+					<h:outputText value="Nombre: " style="font-weight:bold" />
+					<h:outputText value="#{service.seleccionado.nombre}" />
+					
+					<h:outputText value="Apellidos: " style="font-weight:bold" />
 					<h:outputText value="#{service.seleccionado.apellido}" />
-
-					<h:outputText value="Alias:" />
+					
+					<h:outputText value="Alias: " style="font-weight:bold" />
 					<h:outputText value="#{service.seleccionado.alias}" />
-
-					<h:outputText value="Email:" />
+					
+					<h:outputText value="Email: " style="font-weight:bold" />
 					<h:outputText value="#{service.seleccionado.email}" />
+					
+					<h:outputText value="Teléfono: " style="font-weight:bold" />
+					<h:outputText value="#{service.seleccionado.telefono}" />
+					
+					<h:outputText value="Dirección: " style="font-weight:bold" />
+					<h:outputText value="#{service.seleccionado.direccion}" />
+					
+					<h:outputText value="Fecha de creación: " style="font-weight:bold" />
+					<h:outputText value="#{service.formatDate(service.seleccionado.fechacreacion)}" />
+					
+					<h:outputText value="Fecha de modificación: " style="font-weight:bold" />
+					<h:outputText value="#{service.formatDate(service.seleccionado.fechamodificacion)}" />
 				</p:panelGrid>
 			</p:outputPanel>
 		</p:dialog>
 	</h:form>
+	
 </h:body>
 </html>

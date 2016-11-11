@@ -32,8 +32,9 @@ public class AgendaRestFulClient {
 	public Contacto contacto;
 	public boolean	editar = false;
 	public List<Contacto> listaContactos;
+	public int cantidadContactos;
 	public Contacto seleccionado;
-	public String filtro;
+	public String filtro="";
 	
 	
 	public class JsonRecibido{
@@ -46,10 +47,21 @@ public class AgendaRestFulClient {
 		}
 	}
 	
+	public int getCantidadContactos() {
+		return cantidadContactos;
+	}
+
+	public void setCantidadContactos(int cantidadContactos) {
+		this.cantidadContactos = cantidadContactos;
+	}
+
 	public String getFiltro() {
 		return this.filtro;
 	}
-
+	
+	public void setSelec(Contacto contacto){
+		setSeleccionado(contacto);
+	}
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
 	}
@@ -86,7 +98,7 @@ public class AgendaRestFulClient {
 	public void inicializar(ComponentSystemEvent event){
 		this.listaContactos = new ArrayList<Contacto>();
 		//this.filtro = "";
-		setListaContactos(getListaContactosFromServer());
+		setListaContactos(getListaContactosFromServer()); 
 	}
 	
 	public void guardar(){
@@ -189,6 +201,7 @@ public class AgendaRestFulClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		this.cantidadContactos = ag.total;
 		return ag.lista;
 	}
 
