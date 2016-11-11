@@ -35,6 +35,10 @@ public class AgendaRestFulClient {
 	public int cantidadContactos;
 	public Contacto seleccionado;
 	public String filtro="";
+	public boolean showAlertSucces;
+	public boolean showAlertFailed;
+	public boolean showAlertSuccesEliminar;
+	public boolean showAlertFailedEliminar;
 	
 	
 	public class JsonRecibido{
@@ -47,6 +51,38 @@ public class AgendaRestFulClient {
 		}
 	}
 	
+	public boolean isShowAlertSucces() {
+		return showAlertSucces;
+	}
+
+	public void setShowAlertSucces(boolean showAlertSucces) {
+		this.showAlertSucces = showAlertSucces;
+	}
+
+	public boolean isShowAlertFailed() {
+		return showAlertFailed;
+	}
+	
+	public boolean isShowAlertSuccesEliminar() {
+		return showAlertSuccesEliminar;
+	}
+
+	public void setShowAlertSuccesEliminar(boolean showAlertSuccesEliminar) {
+		this.showAlertSuccesEliminar = showAlertSuccesEliminar;
+	}
+
+	public boolean isShowAlertFailedEliminar() {
+		return showAlertFailedEliminar;
+	}
+
+	public void setShowAlertFailedEliminar(boolean showAlertFailedEliminar) {
+		this.showAlertFailedEliminar = showAlertFailedEliminar;
+	}
+
+	public void setShowAlertFailed(boolean showAlertFailed) {
+		this.showAlertFailed = showAlertFailed;
+	}
+
 	public int getCantidadContactos() {
 		return cantidadContactos;
 	}
@@ -224,8 +260,11 @@ public class AgendaRestFulClient {
 			outputStream.flush();
 
 			if (httpConnection.getResponseCode() != 200) {
+				this.showAlertFailed=true;
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ httpConnection.getResponseCode());
+			} else {
+				this.showAlertSucces=true;
 			}
 
 			BufferedReader responseBuffer = new BufferedReader(
@@ -270,8 +309,11 @@ public class AgendaRestFulClient {
 			outputStream.flush();
 
 			if (httpConnection.getResponseCode() != 200) {
+				this.showAlertFailed=true;
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ httpConnection.getResponseCode());
+			} else {
+				this.showAlertSucces=true;
 			}
 
 			BufferedReader responseBuffer = new BufferedReader(
@@ -309,9 +351,13 @@ public class AgendaRestFulClient {
 		    httpURLConnection.setRequestProperty("Content-Type",
 		                "application/json");
 		    httpURLConnection.setRequestMethod("DELETE");
+		    
 		    if (httpURLConnection.getResponseCode() != 200) {
+		    	this.showAlertFailed=true;
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ httpURLConnection.getResponseCode());
+			} else {
+				this.showAlertSuccesEliminar=true;
 			}
 		} catch (IOException exception) {
 		    exception.printStackTrace();

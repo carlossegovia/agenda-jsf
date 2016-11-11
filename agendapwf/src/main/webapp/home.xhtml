@@ -149,7 +149,24 @@
 	        	<p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 	        	<p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 	    	</p:confirmDialog>
-	    
+	    	<h:outputScript rendered="#{service.showAlertSuccesEliminar}">
+			   alert("Se elimino correctamente el contacto");
+			   #{service.setShowAlertSuccesEliminar(false)};
+			</h:outputScript>
+			<h:outputScript rendered="#{service.showAlertFailedEliminar}">
+			   alert("No se pudo eliminar el contacto");
+			   #{service.setShowAlertFailedEliminar(false)};
+			</h:outputScript>
+			
+			<h:outputScript rendered="#{service.showAlertSucces}">
+			   alert("Se guardo correctamente el contacto");
+			   #{service.setShowAlertSucces(false)};
+			</h:outputScript>
+			<h:outputScript rendered="#{service.showAlertFailed}">
+				   alert("No se pudo guardar el contacto");
+				   #{service.setShowAlertFailed(false)};
+			</h:outputScript>
+		
 			<p:tooltip id="toolTipFade3" for="buttonDelete" value="Eliminar"
 				position="top" />
 		</p:column>
